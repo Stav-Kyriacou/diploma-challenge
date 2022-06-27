@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
   products: Product[] = [];
 
   //Create Order Variables
+  creatingOrder: boolean = false;
   createCustID: string = "";
   createProdID: string = "";
   createOrderDate: Date = new Date(2022, 6, 27);
@@ -21,14 +22,12 @@ export class MainComponent implements OnInit {
   createShipMode: string = this.shipMode[0];
 
   //Edit Order Variables
+  editingOrder: boolean = false;
   currentOrder: EditOrder = new EditOrder();
-  // editOrderID: number;
-  // editCustID: string;
-  // editProdID: string;
-  editOrderDate: Date = new Date(2022, 6, 27);
-  editShipDate: Date = new Date(2022, 6, 27);
-  // editQuantity: number;
-  // editShipMode: string = this.shipMode[0];
+
+  //Delete Order Variables
+  deletingOrder: boolean = false;
+  deleteOrderID: number;
 
 
   constructor(private _mainService: MainService) {
@@ -53,19 +52,32 @@ export class MainComponent implements OnInit {
 
   }
   createOrder() {
+    this.creatingOrder = true;
     this._mainService.createOrder(this.createCustID, this.createProdID, this.createQuantity, this.createOrderDate, this.createShipDate, this.createShipMode).subscribe(null, null, () => {
       this.fetchData();
+      this.creatingOrder = false;
     });
   }
   editOrder() {
+    this.editingOrder = true;
     this.currentOrder.orderDate = this.currentOrder.orderDate;
-    this._mainService.editOrder(this.currentOrder).subscribe(null, null, ()=> {
+    this._mainService.updateOrder(this.currentOrder).subscribe(null, null, () => {
       this.fetchData();
+      this.editingOrder = false;
+    });
+  }
+  deleteOrder() {
+    this.deletingOrder = true;
+    this._mainService.deleteOrder(this.deleteOrderID).subscribe(null, null, () => {
+      this.fetchData();
+      this.deletingOrder = false;
     });
   }
   fetchData() {
     this._mainService.getAllOrders().subscribe(data => this.orders = data, null, () => {
+      this.orders.reverse();
       this.currentOrder.orderID = this.orders[0].orderID;
+      this.deleteOrderID = this.orders[0].orderID;
     });
     this._mainService.getAllCustomers().subscribe(data => this.customers = data, null, () => {
       this.createCustID = this.customers[0].custID;

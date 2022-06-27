@@ -34,7 +34,7 @@ namespace api.Controllers
         [HttpPost]
         [EnableCors("MyPolicy")]
         [Route("/create-order")]
-        public int CreateNewOrder(string custID, string prodID, int quantity, DateTime orderDate, DateTime shipDate, string shipMode)
+        public int CreateNewOrder(string custID, string prodID, int quantity, string orderDate, string shipDate, string shipMode)
         {
             return dbHandler.CreateNewOrder(custID, prodID, quantity, orderDate, shipDate, shipMode);
         }

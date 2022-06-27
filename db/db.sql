@@ -74,9 +74,9 @@ GO
 CREATE TABLE [Order]
 (
     OrderID INT NOT NULL,
-    OrderDate DATE NOT NULL,
+    OrderDate NVARCHAR(20) NOT NULL,
     Quantity INT NOT NULL,
-    ShipDate DATE NOT NULL,
+    ShipDate NVARCHAR(20) NOT NULL,
     CustID NVARCHAR(20) NOT NULL,
     ProdID NVARCHAR(30) NOT NULL,
     ShipMode NVARCHAR(50) NOT NULL,

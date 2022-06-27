@@ -24,9 +24,9 @@ CREATE PROCEDURE ADD_ORDER
     @pOrderID INT OUTPUT,
     @pCustID NVARCHAR(20),
     @pProdID NVARCHAR(30),
-    @pOrderDate DATE,
+    @pOrderDate NVARCHAR(20),
     @pQuantity INT,
-    @pShipDate DATE,
+    @pShipDate NVARCHAR(20),
     @pShipMode NVARCHAR(50)
 AS
 BEGIN
@@ -81,9 +81,9 @@ CREATE PROCEDURE UPDATE_ORDER
     @pOrderID INT,
     @pCustID NVARCHAR(20),
     @pProdID NVARCHAR(30),
-    @pOrderDate DATE,
+    @pOrderDate NVARCHAR(20),
     @pQuantity INT,
-    @pShipDate DATE,
+    @pShipDate NVARCHAR(20),
     @pShipMode NVARCHAR(50)
 AS
 BEGIN

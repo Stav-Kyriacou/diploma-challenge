@@ -25,9 +25,9 @@ namespace api.Handlers
                             orders.Add(new Order()
                             {
                                 OrderID = reader.GetInt32(0),
-                                OrderDate = reader.GetDateTime(1),
+                                OrderDate = reader.GetString(1),
                                 Quantity = reader.GetInt32(2),
-                                ShipDate = reader.GetDateTime(3),
+                                ShipDate = reader.GetString(3),
                                 CustID = reader.GetString(4),
                                 ProdID = reader.GetString(5),
                                 ShipMode = reader.GetString(6)
@@ -42,7 +42,7 @@ namespace api.Handlers
             return orders;
         }
 
-        public int CreateNewOrder(string custID, string prodID, int quantity, DateTime orderDate, DateTime shipDate, string shipMode)
+        public int CreateNewOrder(string custID, string prodID, int quantity, string orderDate, string shipDate, string shipMode)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {

@@ -5,13 +5,13 @@
         <h2>Create Order</h2>
         <label>Select Customer </label>
         <select #custSelect (change)="onChange(custSelect.value)" [(ngModel)]="createCustID">
-            <option *ngFor="let customer of customers" [value]="customer.custID">{{customer.fullName}}</option>
+            <option *ngFor="let customer of customers" [value]="customer.custID">{{customer.custID}} --- {{customer.fullName}}</option>
         </select>
         <br>
         <br>
         <label>Select Product </label>
         <select #prodSelect (change)="onChange(prodSelect.value)" [(ngModel)]="createProdID">
-            <option *ngFor="let prod of products" [value]="prod.prodID">{{prod.prodID}} - {{prod.description}}</option>
+            <option *ngFor="let prod of products" [value]="prod.prodID">{{prod.prodID}} --- {{prod.description}}</option>
         </select>
         <br>
         <br>
@@ -33,7 +33,7 @@
         </select>
         <br>
         <br>
-        <button (click)="createOrder()">Create Order</button>
+        <button (click)="createOrder()">Create Order</button><span *ngIf="creatingOrder"> Creating order...</span>
     </div>
     <hr>
     <div class="edit-order">
@@ -74,7 +74,19 @@
         </select>
         <br>
         <br>
-        <button (click)="editOrder()">Edit Order</button>
+        <button (click)="editOrder()">Edit Order</button><span *ngIf="editingOrder"> Editing Order...</span>
+    </div>
+    <hr>
+    <div class="delete-order">
+        <h2>Delete Order</h2>
+        <label>Select Order </label>
+        <select #orderSelect (change)="onChange(orderSelect.value)" [(ngModel)]="deleteOrderID">
+            <option *ngFor="let order of orders" [value]="order.orderID">{{order.orderID}}</option>
+        </select>
+        <br>
+        <br>
+        <button (click)="deleteOrder()">Delete Order</button><span *ngIf="deletingOrder"> Deleting order...</span>
+
     </div>
     <hr>
     <div class="view-orders">
