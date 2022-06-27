@@ -2,19 +2,22 @@
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
 using Microsoft.AspNetCore.Cors;
+using api.Handlers;
 
 namespace api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class CustomerController : ControllerBase
     {
+        CustomerHandler dbHandler = new CustomerHandler();
+
         [HttpGet]
         [EnableCors("MyPolicy")]
-        [Route("/model")]
-        public IEnumerable<Model> Get()
+        [Route("/customers")]
+        public IEnumerable<Customer> Get()
         {
-            return null;
+            return dbHandler.GetAllCustomers();
         }
     }
 }
