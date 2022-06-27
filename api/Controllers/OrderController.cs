@@ -9,7 +9,7 @@ namespace api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class OrderController : ControllerBase
     {
         OrderHandler dbHandler = new OrderHandler();
 
