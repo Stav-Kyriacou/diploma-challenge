@@ -38,7 +38,7 @@ namespace api.Controllers
         {
             return dbHandler.CreateNewOrder(custID, prodID, quantity, orderDate, shipDate, shipMode);
         }
-        
+
         /// <summary>
         /// Delete an order
         /// </summary>
@@ -52,5 +52,17 @@ namespace api.Controllers
             return dbHandler.DeleteOrder(orderID);
         }
 
+        /// <summary>
+        /// Update an order
+        /// </summary>
+        /// <param name="newOrder"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [EnableCors("MyPolicy")]
+        [Route("/update-order")]
+        public string UpdateOrder([FromBody] Order newOrder)
+        {
+            return dbHandler.UpdateOrder(newOrder);
+        }
     }
 }

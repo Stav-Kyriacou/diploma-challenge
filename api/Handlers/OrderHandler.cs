@@ -76,6 +76,7 @@ namespace api.Handlers
                 }
             }
         }
+
         public int DeleteOrder(int orderID)
         {
             int rowsAffected = 0;
@@ -85,7 +86,7 @@ namespace api.Handlers
 
                 using (SqlCommand command = new SqlCommand("DELETE_ORDER", conn))
                 {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@pOrderID", orderID);
 
                     rowsAffected = command.ExecuteNonQuery();
@@ -93,6 +94,24 @@ namespace api.Handlers
                 }
             }
             return rowsAffected;
+        }
+
+        // $"UPDATE [Order] SET CustID = '{newOrder.CustID}', ProdID = '{newOrder.ProdID}', OrderDate = '{newOrder.OrderDate}', Quantity = {newOrder.Quantity}, ShipDate = '{newOrder.ShipDate}', ShipMode = '{newOrder.ShipMode}' WHERE OrderID = {newOrder.OrderID}"
+        public string UpdateOrder(Order newOrder)
+        {
+            int rowsAffected = 0;
+
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand($"UPDATE [Order] SET CustID = '{newOrder.CustID}', ProdID = '{newOrder.ProdID}', OrderDate = '{newOrder.OrderDate}', Quantity = {newOrder.Quantity}, ShipDate = '{newOrder.ShipDate}', ShipMode = '{newOrder.ShipMode}' WHERE OrderID = {newOrder.OrderID}", conn))
+                {
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+
+                conn.Close();
+            }
+            return rowsAffected.ToString();
         }
     }
 }
