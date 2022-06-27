@@ -1,1 +1,62 @@
-<p>main works!</p>
+<div class="orders">
+    <h1>Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Order Date</th>
+                <th>Quanitity</th>
+                <th>Ship Date</th>
+                <th>Customer ID</th>
+                <th>Product ID</th>
+                <th>Ship Mode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.orderID}}</td>
+                <td>{{order.orderDate}}</td>
+                <td>{{order.quantity}}</td>
+                <td>{{order.shipDate}}</td>
+                <td>{{order.custID}}</td>
+                <td>{{order.prodID}}</td>
+                <td>{{order.shipMode}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<hr>
+<div class="create-order">
+    <h1>Create Order</h1>
+    <label>Select Customer </label>
+    <select #custSelect (change)="onChange(custSelect.value)" [(ngModel)]="createCustID">
+        <option *ngFor="let customer of customers" [value]="customer.custID">{{customer.fullName}}</option>
+    </select>
+    <br>
+    <br>
+    <label>Select Product </label>
+    <select #prodSelect (change)="onChange(prodSelect.value)" [(ngModel)]="createProdID">
+        <option *ngFor="let prod of products" [value]="prod.prodID">{{prod.prodID}} - {{prod.description}}</option>
+    </select>
+    <br>
+    <br>
+    <label>Order Date </label>
+    <input type="date" [(ngModel)]="createOrderDate">
+    <br>
+    <br>
+    <label>Ship Date </label>
+    <input type="date" [(ngModel)]="createShipDate">
+    <br>
+    <br>
+    <label>Quanitity </label>
+    <input type="number" min=0 [(ngModel)]="createQuantity">
+    <br>
+    <br>
+    <label>Shipping </label>
+    <select #shipSelect (change)="shippingChange(shipSelect.value)" [(ngModel)]="createShipMode">
+        <option *ngFor="let ship of shipMode" [value]="ship">{{ship}}</option>
+    </select>
+    <button (click)="createOrder()">Create Order</button>
+</div>
+<button (click)="test()">Test</button>
