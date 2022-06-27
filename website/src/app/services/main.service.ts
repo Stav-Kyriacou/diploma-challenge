@@ -31,10 +31,31 @@ export class MainService {
       .append('shipDate', shipDate.toJSON())
       .append('shipMode', shipMode)
 
-    return this._http.post<number>(this.baseUrl + '/create-order', body, {'params': params});
+    return this._http.post<number>(this.baseUrl + '/create-order', body, { 'params': params });
+  }
+  editOrder(newOrder: EditOrder): Observable<string> {
+    const body = '';
+    const params = new HttpParams()
+      .append('orderID', newOrder.orderID)
+      .append('custID', newOrder.custID)
+      .append('prodID', newOrder.prodID)
+      .append('quantity', newOrder.quantity)
+      .append('orderDate', newOrder.orderDate.toJSON())
+      .append('shipDate', newOrder.shipDate.toJSON())
+      .append('shipMode', newOrder.shipMode)
+    return this._http.put<string>(this.baseUrl + '/update-order', body, { 'params': params });
   }
 }
 export interface Order {
+  orderID: number;
+  orderDate: Date;
+  quantity: number;
+  shipDate: Date;
+  custID: string;
+  prodID: string;
+  shipMode: string;
+}
+export class EditOrder {
   orderID: number;
   orderDate: Date;
   quantity: number;

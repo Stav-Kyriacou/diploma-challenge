@@ -97,14 +97,14 @@ namespace api.Handlers
         }
 
         // $"UPDATE [Order] SET CustID = '{newOrder.CustID}', ProdID = '{newOrder.ProdID}', OrderDate = '{newOrder.OrderDate}', Quantity = {newOrder.Quantity}, ShipDate = '{newOrder.ShipDate}', ShipMode = '{newOrder.ShipMode}' WHERE OrderID = {newOrder.OrderID}"
-        public string UpdateOrder(Order newOrder)
+        public string UpdateOrder(int orderID, string orderDate, int quantity, string shipDate, string custID, string prodID, string shipMode)
         {
             int rowsAffected = 0;
 
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand($"UPDATE [Order] SET CustID = '{newOrder.CustID}', ProdID = '{newOrder.ProdID}', OrderDate = '{newOrder.OrderDate}', Quantity = {newOrder.Quantity}, ShipDate = '{newOrder.ShipDate}', ShipMode = '{newOrder.ShipMode}' WHERE OrderID = {newOrder.OrderID}", conn))
+                using (SqlCommand command = new SqlCommand($"UPDATE [Order] SET CustID = '{custID}', ProdID = '{prodID}', OrderDate = '{orderDate}', Quantity = {quantity}, ShipDate = '{shipDate}', ShipMode = '{shipMode}' WHERE OrderID = {orderID}", conn))
                 {
                     rowsAffected = command.ExecuteNonQuery();
                 }

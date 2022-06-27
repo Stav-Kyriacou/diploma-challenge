@@ -1,62 +1,109 @@
-<div class="orders">
-    <h1>Orders</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Order Date</th>
-                <th>Quanitity</th>
-                <th>Ship Date</th>
-                <th>Customer ID</th>
-                <th>Product ID</th>
-                <th>Ship Mode</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let order of orders">
-                <td>{{order.orderID}}</td>
-                <td>{{order.orderDate}}</td>
-                <td>{{order.quantity}}</td>
-                <td>{{order.shipDate}}</td>
-                <td>{{order.custID}}</td>
-                <td>{{order.prodID}}</td>
-                <td>{{order.shipMode}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<br>
-<hr>
-<div class="create-order">
-    <h1>Create Order</h1>
-    <label>Select Customer </label>
-    <select #custSelect (change)="onChange(custSelect.value)" [(ngModel)]="createCustID">
-        <option *ngFor="let customer of customers" [value]="customer.custID">{{customer.fullName}}</option>
-    </select>
-    <br>
-    <br>
-    <label>Select Product </label>
-    <select #prodSelect (change)="onChange(prodSelect.value)" [(ngModel)]="createProdID">
-        <option *ngFor="let prod of products" [value]="prod.prodID">{{prod.prodID}} - {{prod.description}}</option>
-    </select>
-    <br>
-    <br>
-    <label>Order Date </label>
-    <input type="date" [(ngModel)]="createOrderDate">
-    <br>
-    <br>
-    <label>Ship Date </label>
-    <input type="date" [(ngModel)]="createShipDate">
-    <br>
-    <br>
-    <label>Quanitity </label>
-    <input type="number" min=0 [(ngModel)]="createQuantity">
-    <br>
-    <br>
-    <label>Shipping </label>
-    <select #shipSelect (change)="shippingChange(shipSelect.value)" [(ngModel)]="createShipMode">
-        <option *ngFor="let ship of shipMode" [value]="ship">{{ship}}</option>
-    </select>
-    <button (click)="createOrder()">Create Order</button>
-</div>
-<button (click)="test()">Test</button>
+<body>
+    <button (click)="test()">Test</button>
+    <hr>
+    <div class="create-order">
+        <h2>Create Order</h2>
+        <label>Select Customer </label>
+        <select #custSelect (change)="onChange(custSelect.value)" [(ngModel)]="createCustID">
+            <option *ngFor="let customer of customers" [value]="customer.custID">{{customer.fullName}}</option>
+        </select>
+        <br>
+        <br>
+        <label>Select Product </label>
+        <select #prodSelect (change)="onChange(prodSelect.value)" [(ngModel)]="createProdID">
+            <option *ngFor="let prod of products" [value]="prod.prodID">{{prod.prodID}} - {{prod.description}}</option>
+        </select>
+        <br>
+        <br>
+        <label>Order Date </label>
+        <input type="date" [(ngModel)]="createOrderDate">
+        <br>
+        <br>
+        <label>Ship Date </label>
+        <input type="date" [(ngModel)]="createShipDate">
+        <br>
+        <br>
+        <label>Quanitity </label>
+        <input type="number" min=1 [(ngModel)]="createQuantity">
+        <br>
+        <br>
+        <label>Shipping </label>
+        <select #shipSelect (change)="shippingChange(shipSelect.value)" [(ngModel)]="createShipMode">
+            <option *ngFor="let ship of shipMode" [value]="ship">{{ship}}</option>
+        </select>
+        <br>
+        <br>
+        <button (click)="createOrder()">Create Order</button>
+    </div>
+    <hr>
+    <div class="edit-order">
+        <h2>Edit Order</h2>
+        <label>Select ID of Order to Edit </label>
+        <select #orderSelect (change)="onChange(orderSelect.value)" [(ngModel)]="currentOrder.orderID">
+            <option *ngFor="let order of orders" [value]="order.orderID">{{order.orderID}}</option>
+        </select>
+        <br>
+        <br>
+        <label>Change Customer </label>
+        <select #editCustSelect (change)="onChange(editCustSelect.value)" [(ngModel)]="currentOrder.custID">
+            <option *ngFor="let customer of customers" [value]="customer.custID">{{customer.fullName}}</option>
+        </select>
+        <br>
+        <br>
+        <label>Change Product </label>
+        <select #prodSelect (change)="onChange(prodSelect.value)" [(ngModel)]="currentOrder.prodID">
+            <option *ngFor="let prod of products" [value]="prod.prodID">{{prod.prodID}} - {{prod.description}}</option>
+        </select>
+        <br>
+        <br>
+        <label>Change Order Date </label>
+        <input type="date" [(ngModel)]="currentOrder.orderDate">
+        <br>
+        <br>
+        <label>Change Ship Date </label>
+        <input type="date" [(ngModel)]="currentOrder.shipDate">
+        <br>
+        <br>
+        <label>Change Quanitity </label>
+        <input type="number" min=1 [(ngModel)]="currentOrder.quantity">
+        <br>
+        <br>
+        <label>Change Shipping Mode </label>
+        <select #shipSelect (change)="shippingChange(shipSelect.value)" [(ngModel)]="currentOrder.shipMode">
+            <option *ngFor="let ship of shipMode" [value]="ship">{{ship}}</option>
+        </select>
+        <br>
+        <br>
+        <button (click)="editOrder()">Edit Order</button>
+    </div>
+    <hr>
+    <div class="view-orders">
+        <h2>Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Order Date</th>
+                    <th>Quanitity</th>
+                    <th>Ship Date</th>
+                    <th>Customer ID</th>
+                    <th>Product ID</th>
+                    <th>Ship Mode</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{order.orderID}}</td>
+                    <td>{{order.orderDate}}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>{{order.shipDate}}</td>
+                    <td>{{order.custID}}</td>
+                    <td>{{order.prodID}}</td>
+                    <td>{{order.shipMode}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</body>

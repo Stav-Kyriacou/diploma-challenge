@@ -55,14 +55,20 @@ namespace api.Controllers
         /// <summary>
         /// Update an order
         /// </summary>
-        /// <param name="newOrder"></param>
+        /// <param name="orderID"></param>
+        /// <param name="orderDate"></param>
+        /// <param name="quantity"></param>
+        /// <param name="shipDate"></param>
+        /// <param name="custID"></param>
+        /// <param name="prodID"></param>
+        /// <param name="shipMode"></param>
         /// <returns></returns>
         [HttpPut]
         [EnableCors("MyPolicy")]
         [Route("/update-order")]
-        public string UpdateOrder([FromBody] Order newOrder)
+        public string UpdateOrder(int orderID, string orderDate, int quantity, string shipDate, string custID, string prodID, string shipMode)
         {
-            return dbHandler.UpdateOrder(newOrder);
+            return dbHandler.UpdateOrder(orderID, orderDate, quantity, shipDate, custID, prodID, shipMode);
         }
     }
 }
